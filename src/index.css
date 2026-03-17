@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 15% 8%;
+    --foreground: 220 20% 92%;
+    --card: 240 12% 12%;
+    --card-foreground: 220 20% 92%;
+    --popover: 240 12% 12%;
+    --popover-foreground: 220 20% 92%;
+    --primary: 260 80% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 12% 14%;
+    --secondary-foreground: 220 20% 85%;
+    --muted: 240 10% 16%;
+    --muted-foreground: 220 10% 50%;
+    --accent: 200 80% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 10% 18%;
+    --input: 240 10% 18%;
+    --ring: 260 80% 65%;
+    --radius: 12px;
+    --radius-inner: 6px;
+    --surface: 240 12% 11%;
+    --glow-primary: 260 80% 65%;
+    --glow-accent: 200 80% 55%;
+    --sidebar-background: 240 15% 6%;
+    --sidebar-foreground: 220 10% 60%;
+    --sidebar-primary: 260 80% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 12% 14%;
+    --sidebar-accent-foreground: 220 20% 90%;
+    --sidebar-border: 240 10% 14%;
+    --sidebar-ring: 260 80% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, label, th {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+}
+
+/* Ambient background */
+.ambient-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.ambient-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 20%, hsl(260 80% 65% / 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, hsl(200 80% 55% / 0.04) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, hsl(320 70% 50% / 0.03) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Thought trace animation */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 4px hsl(260 80% 65% / 0.3); }
+  50% { box-shadow: 0 0 12px hsl(260 80% 65% / 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.thought-dot {
+  @apply w-1.5 h-1.5 rounded-full;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+.thought-dot:nth-child(2) { animation-delay: 0.15s; }
+.thought-dot:nth-child(3) { animation-delay: 0.3s; }
+.thought-dot:nth-child(4) { animation-delay: 0.45s; }
+
+/* Glass morphism card */
+.glass-card {
+  background: hsl(var(--card) / 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+/* Block container */
+.block-container {
+  @apply border-l-2 border-border/40 pl-6 py-4 transition-all duration-300;
+  position: relative;
+}
+
+.block-container::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, hsl(var(--primary) / 0), hsl(var(--primary) / 0), hsl(var(--primary) / 0));
+  transition: background 0.4s ease;
+}
+
+.block-container:hover::before {
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.1), hsl(var(--primary) / 0.7), hsl(var(--accent) / 0.3));
+}
+
+.block-container:hover {
+  border-left-color: transparent;
+  background: hsl(var(--primary) / 0.02);
+}
+
+/* Glow button */
+.glow-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.glow-btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)));
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-btn:hover::after {
+  opacity: 1;
+}
+
+/* Shimmer text effect */
+.shimmer-text {
+  background: linear-gradient(90deg, 
+    hsl(var(--foreground)) 0%, 
+    hsl(var(--primary)) 50%, 
+    hsl(var(--foreground)) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.4);
+}
+
+/* Prose styling for markdown */
+.prose-aura {
+  @apply text-foreground leading-relaxed;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 70ch;
+}
+
+.prose-aura h1, .prose-aura h2, .prose-aura h3 {
+  @apply text-foreground font-semibold mt-6 mb-3;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary) / 0.8));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.prose-aura p {
+  @apply mb-4;
+}
+
+.prose-aura code {
+  @apply px-2 py-1 rounded-md text-sm;
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.15);
+}
+
+.prose-aura pre {
+  @apply p-4 rounded-xl overflow-x-auto mb-4;
+  background: hsl(var(--surface));
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+
+.prose-aura pre code {
+  @apply bg-transparent p-0 border-0;
+  color: hsl(var(--foreground));
+}
+
+.prose-aura ul, .prose-aura ol {
+  @apply mb-4 pl-6;
+}
+
+.prose-aura li {
+  @apply mb-1.5;
+}
+
+.prose-aura li::marker {
+  color: hsl(var(--primary));
+}
+
+.prose-aura blockquote {
+  @apply border-l-2 pl-4 italic;
+  border-color: hsl(var(--primary) / 0.5);
+  color: hsl(var(--muted-foreground));
+  background: hsl(var(--primary) / 0.03);
+  padding: 0.75rem 1rem;
+  border-radius: 0 8px 8px 0;
+}
+
+.prose-aura a {
+  @apply underline underline-offset-2;
+  color: hsl(var(--accent));
+  transition: color 0.2s;
+}
+
+.prose-aura a:hover {
+  color: hsl(var(--primary));
+}
+
+.prose-aura strong {
+  @apply font-semibold text-foreground;
+}
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+}
