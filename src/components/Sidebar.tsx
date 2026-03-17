@@ -19,7 +19,7 @@ export function Sidebar({ onNewThread, hasMessages }: SidebarProps) {
           </div>
           <div>
             <h1 className="text-lg font-semibold tracking-tight text-foreground">
-              aura
+              anurag
             </h1>
           </div>
         </div>

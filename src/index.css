@@ -208,14 +208,14 @@
 }
 
 /* Prose styling for markdown */
-.prose-aura {
+.prose-anurag {
   @apply text-foreground leading-relaxed;
   font-size: 15px;
   line-height: 1.7;
   max-width: 70ch;
 }
 
-.prose-aura h1, .prose-aura h2, .prose-aura h3 {
+.prose-anurag h1, .prose-anurag h2, .prose-anurag h3 {
   @apply text-foreground font-semibold mt-6 mb-3;
   font-family: 'Space Grotesk', sans-serif;
   letter-spacing: -0.02em;
@@ -225,41 +225,41 @@
   -webkit-text-fill-color: transparent;
 }
 
-.prose-aura p {
+.prose-anurag p {
   @apply mb-4;
 }
 
-.prose-aura code {
+.prose-anurag code {
   @apply px-2 py-1 rounded-md text-sm;
   background: hsl(var(--primary) / 0.1);
   color: hsl(var(--primary));
   border: 1px solid hsl(var(--primary) / 0.15);
 }
 
-.prose-aura pre {
+.prose-anurag pre {
   @apply p-4 rounded-xl overflow-x-auto mb-4;
   background: hsl(var(--surface));
   border: 1px solid hsl(var(--border) / 0.5);
 }
 
-.prose-aura pre code {
+.prose-anurag pre code {
   @apply bg-transparent p-0 border-0;
   color: hsl(var(--foreground));
 }
 
-.prose-aura ul, .prose-aura ol {
+.prose-anurag ul, .prose-anurag ol {
   @apply mb-4 pl-6;
 }
 
-.prose-aura li {
+.prose-anurag li {
   @apply mb-1.5;
 }
 
-.prose-aura li::marker {
+.prose-anurag li::marker {
   color: hsl(var(--primary));
 }
 
-.prose-aura blockquote {
+.prose-anurag blockquote {
   @apply border-l-2 pl-4 italic;
   border-color: hsl(var(--primary) / 0.5);
   color: hsl(var(--muted-foreground));
@@ -268,17 +268,17 @@
   border-radius: 0 8px 8px 0;
 }
 
-.prose-aura a {
+.prose-anurag a {
   @apply underline underline-offset-2;
   color: hsl(var(--accent));
   transition: color 0.2s;
 }
 
-.prose-aura a:hover {
+.prose-anurag a:hover {
   color: hsl(var(--primary));
 }
 
-.prose-aura strong {
+.prose-anurag strong {
   @apply font-semibold text-foreground;
 }
 

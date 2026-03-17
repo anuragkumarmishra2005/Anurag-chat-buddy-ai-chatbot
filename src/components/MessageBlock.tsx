@@ -26,7 +26,7 @@ export function MessageBlock({ message }: { message: Message }) {
           )}
         </div>
         <span className="text-xs font-medium text-muted-foreground tracking-wide">
-          {isUser ? "You" : "Aura"}
+          {isUser ? "You" : "Anurag"}
         </span>
         <span className="text-[10px] text-muted-foreground/40 tabular-nums ml-auto">
           {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
@@ -38,7 +38,7 @@ export function MessageBlock({ message }: { message: Message }) {
           {message.content}
         </p>
       ) : (
-        <div className="prose-aura ml-[34px]">
+        <div className="prose-anurag ml-[34px]">
           <ReactMarkdown>{message.content}</ReactMarkdown>
         </div>
       )}
